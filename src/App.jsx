@@ -20,6 +20,12 @@ const App = () => {
     setHeading('');
   }
 
+  const deleteTask = (idx) => {
+    const copyTask = [...task];
+    copyTask.splice(idx,1);
+    setTask(copyTask);
+  }
+
   return (
     <div className="bg-gray-700 h-screen text-white p-15 lg:flex">
 
@@ -55,7 +61,7 @@ const App = () => {
       </form>
       <div className="lg:w-1/2 p-10">
         <h1 className="items-start  text-7xl font-semibold text-#F3F4F6 ">Recent Notes</h1>
-        <div className="flex flex-wrap gap-6 mt-10 h-full overflow-auto">
+        <div className="flex flex-wrap gap-6 mt-10  overflow-auto">
           {task.map(function (elem, idx){
             return <div 
             key={idx} 
@@ -64,7 +70,9 @@ const App = () => {
               <h3 className="font-bold leading-tight text-xl">{elem.heading}</h3>
               <p className="leading-tight font-medium text-gray-400 mt-3">{elem.details}</p>
               </div>
-              <button className="#94A3B8 rounded py-1 px-2 text-white active:scale-95 absolute bottom-4 right-4 hover:text-red-400"><Trash /></button>
+              <button onClick={()=>{
+                deleteTask(idx);
+              }} className="#94A3B8 rounded py-1 px-2 text-white active:scale-95 absolute bottom-4 right-4 hover:text-red-400"><Trash /></button>
             </div>
           })}
         </div>
